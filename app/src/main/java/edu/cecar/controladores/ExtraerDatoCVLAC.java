@@ -20,10 +20,20 @@ public class ExtraerDatoCVLAC {
             Element tablas = documentoHTML.select("table").get(1); //Se obtiene la segunda tabla
             Elements filasTabla = tablas.select("tr"); // Se obtienen las filas de la tabla
 
+            int filaNombre = 0;
+            int filaNacionalidad = 2;
+            int filaSexo = 3;
+
+            if(filasTabla.size()>4){
+                filaNombre = 2;
+                filaNacionalidad = 4;
+                filaSexo = 5;
+            }
+
             //Se obtienen las columnas para cada atributo del invstigador
-            String nombre = filasTabla.get(0).select("td").get(1).text();
-            String nacionalidad = filasTabla.get(2).select("td").get(1).text();
-            String sexo = filasTabla.get(3).select("td").get(1).text();
+            String nombre = filasTabla.get(filaNombre).select("td").get(1).text();
+            String nacionalidad = filasTabla.get(filaNacionalidad).select("td").get(1).text();
+            String sexo = filasTabla.get(filaSexo).select("td").get(1).text();
 
             //Se crea el objeto investigador
             investigador = new Investigador(nombre, nacionalidad,sexo,true);
